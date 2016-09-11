@@ -56,20 +56,3 @@ class PersonDao{
   }
 
 }
-
-
-
-void main (){
-
-  PersonDao dao = new PersonDao();
-//  Person p = new Person(1, "victor", "victor.hugo.origins@gmail.com");
-//
-//  dao.persist(p);
-
-  dao.executeQuery("Select * from Person").then((result){
-
-    print(JSON.encode(result));
-
-  });
-
-}
