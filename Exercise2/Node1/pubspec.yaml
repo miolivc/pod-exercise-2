@@ -1,0 +1,4 @@
+name: Node1
+description: Question of POD discipline
+dependencies:
+  postgresql: any
