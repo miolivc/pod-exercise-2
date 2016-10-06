@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Bate Papo da POD!</h1>
+
+        <textarea id="chatlog" readonly style="height: 150px;"></textarea>
+        <br/>
+        <input id="msg" type="text" />
+        <button type="submit" id="sendButton" onClick="postToServer()">Clique para Enviar ! :D</button>
+
+        <script>
+            
+            var host = "ws://localhost:8080/Exercise13/websocketserver";
+            var ws;
+
+            window.onload = setupWebSocket();
+
+            function setupWebSocket() {
+
+                if ('WebSocket' in window) {
+                    ws = new WebSocket(host);
+                } else if ('MozWebSocket' in window) {
+                    ws = new MozWebSocket(host);
+                }
+
+                ws.onmessage = function (message) {
+                    document.getElementById("chatlog").textContent += message.data + "\n";
+                };
+                ws.onclose = function () {
+                    setTimeout(setupWebSocket(), 45000);
+                };
+
+            }
+
+            function postToServer() {
+                ws.send(document.getElementById("msg").value);
+                document.getElementById("msg").value = "";
+            }
+
+        </script>
+
+    </body>
+</html>
