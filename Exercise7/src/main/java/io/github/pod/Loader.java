@@ -14,7 +14,7 @@ public class Loader {
     static int x = 0, y = 0;
     static Thread a, b;
 
-    public static void sum() {
+    public synchronized static void sum() {
 
         x = y + 1;
         y = x + 1;
